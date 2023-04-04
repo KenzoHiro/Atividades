@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int main(){
+	char op;
+	float n1,n2,result;
+	
+	printf("---Calculadora---\n\nDigite o 1 valor:");
+	scanf("%f",&n1);
+	
+	
+	printf("Digite o 2 valor:");
+	scanf("%f",&n2);
+	
+	do{
+	printf("Qual operador usar?\n");
+	fflush(stdin);
+	scanf(" %s",&op);
+	}while
+	(op == '+' && op == '-' && op == '*' && op == '/');
+	
+	switch(op){
+		case '+':
+		    printf("%1.f",n1+n2);
+		break;
+		
+		case '-':
+			printf("%1.f",n1-n2);
+			break;	
+			
+		case '/':
+			printf("%1.f",n1/n2);
+			break;
+			
+		case '*':
+			printf("%1.f",n1*n2);
+			break;
+	}
+	return 0;
+}
