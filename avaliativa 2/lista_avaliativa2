@@ -5,6 +5,31 @@
 #define MAX_DISC 2
 #define MAX_EST 15
 
+/*Elabore um programa utilizando as estruturas Professor, Disciplina e Estudante.
+
+
+Professor (nome, funcional, titulacao (especialista, mestre ou doutor)).
+Disciplina (nome, codigo, carga_horaria, professor_responsavel (escolhidos dentre os professores cadastrados)).
+Estudante (nome, matricula, idade), cadastrado em uma disciplina.
+
+
+Serão cadastrados 3 professores, 2 disciplinas e no máximo 15 estudantes distribuídos entre as duas disciplinas, 
+uma disciplina não poderá ter mais que 10 estudantes matriculados.
+
+
+Apresente um relatório dos alunos matriculados na primeira disciplina ordenados por idade.
+codigo_disciplina  nome_professor nome_estudante idade_estudante
+
+
+Apresente um relatório dos alunos matriculados na segunda disciplina ordenados por idade em ordem decrescente.
+codigo_disciplina  nome_professor nome_estudante idade_estudante
+
+
+Aplique o bubble sort para ordenação utilizando um procedimento com passagem de parâmetros por referência.
+
+
+Idade do estudante deverá estar validada entre 16 e 26 por meio de uma função le_valida_idade.*/
+
 typedef enum {
     ESPECIALISTA,
     MESTRE,
@@ -13,19 +38,20 @@ typedef enum {
 
 typedef struct {
     char nome[50];
+    char matricula[10]; 
     Titulacao titulacao;
 } Professor;
 
 typedef struct {
     char nome[50];
-    int matricula;
+    char matricula[10];
     int idade;
 } Estudante;
 
 typedef struct {
     char nome[50];
-    int codigo;
-    int carga_horaria;
+    char codigo[10];
+    char carga_horaria[10];
     int qtd_est;
     Professor professor_responsavel;
     Estudante estudantes[MAX_EST];
@@ -36,7 +62,7 @@ void bubbleSort(Estudante* arr, int n) {
     Estudante temp;
     for (i = 0; i < n - 1; i++) {
         for (j = 0; j < n - i - 1; j++) {
-            if (arr[j].idade > arr[j + 1].idade) {
+            if (arr[j].idade < arr[j + 1].idade) {
                 temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
@@ -52,6 +78,8 @@ void cadastrarProfessores(Professor* professores) {
         printf("Professor %d\n", i + 1);
         printf("Nome: ");
         scanf("%s", professores[i].nome);
+        printf("Matricula: ");
+        scanf("%s", professores[i].matricula);
         printf("Titulacao (0 - Especialista, 1 - Mestre, 2 - Doutor): ");
         int titulacao;
         scanf("%d", &titulacao);
@@ -68,13 +96,13 @@ void cadastrarDisciplinas(Disciplina* disciplinas, Professor* professores) {
         printf("Disciplina %d\n", i + 1);
         printf("Nome: ");
         scanf("%s", disciplinas[i].nome);
-        printf("Codigo: ");
-        scanf("%d", &disciplinas[i].codigo);
+        printf("Codigo da turma: ");
+        scanf("%s", disciplinas[i].codigo);
         printf("Carga Horaria: ");
-        scanf("%d", &disciplinas[i].carga_horaria);
+        scanf("%s", disciplinas[i].carga_horaria);
         printf("Professor Responsavel:\n");
         for (j = 0; j < MAX_PROF; j++) {
-            printf("%d. %s\n", j + 1, professores[j].nome);
+            printf("%d. %s (Matricula: %s)\n", j + 1, professores[j].nome, professores[j].matricula);
         }
         int opcao;
         do {
@@ -90,7 +118,7 @@ void cadastrarDisciplinas(Disciplina* disciplinas, Professor* professores) {
 
 void cadastrarEstudantes(Disciplina* disciplina) {
     int i;
-    printf("Cadastro de Estudantes para a Disciplina %s (Codigo: %d)\n", disciplina->nome, disciplina->codigo);
+    printf("Cadastro de Estudantes para a Disciplina %s (Codigo: %s)\n", disciplina->nome, disciplina->codigo);
     printf("-------------------------------------------------------\n");
     printf("Quantidade de estudantes (maximo %d): ", MAX_EST - disciplina->qtd_est);
     int qtd_est;
@@ -106,7 +134,7 @@ void cadastrarEstudantes(Disciplina* disciplina) {
         printf("Nome: ");
         scanf("%s", disciplina->estudantes[i + disciplina->qtd_est - qtd_est].nome);
         printf("Matricula: ");
-        scanf("%d", &disciplina->estudantes[i + disciplina->qtd_est - qtd_est].matricula);
+        scanf("%s", disciplina->estudantes[i + disciplina->qtd_est - qtd_est].matricula);
         int idade;
         do {
             printf("Idade (entre 16 e 26): ");
@@ -118,23 +146,18 @@ void cadastrarEstudantes(Disciplina* disciplina) {
     printf("\n");
 }
 
-void relatorioDisciplina(Disciplina* disciplina, int ordenacao) {
+void relatorioDisciplina(Disciplina* disciplina) {
     int i;
-    printf("Relatorio Disciplina %d\n", disciplina->codigo);
-    printf("Codigo Disciplina: %d\n", disciplina->codigo);
-    printf("Nome Professor: %s\n", disciplina->professor_responsavel.nome);
-    printf("Alunos Matriculados (Ordenados por idade):\n");
+    printf("Relatorio Disciplina %s\n", disciplina->codigo);
+    printf("Codigo Disciplina: %s\n", disciplina->codigo);
+    printf("Nome Professor: %s (Matricula Funcional: %s)\n", disciplina->professor_responsavel.nome, disciplina->professor_responsavel.matricula);
+    printf("Alunos Matriculados:\n");
 
-    if (ordenacao == 0) {
-        for (i = 0; i < disciplina->qtd_est; i++) {
-            printf("%d %s\n%s %d\n", disciplina->codigo, disciplina->professor_responsavel.nome,
-                   disciplina->estudantes[i].nome, disciplina->estudantes[i].idade);
-        }
-    } else {
-        for (i = disciplina->qtd_est - 1; i >= 0; i--) {
-            printf("%d %s\n%s %d\n", disciplina->codigo, disciplina->professor_responsavel.nome,
-                   disciplina->estudantes[i].nome, disciplina->estudantes[i].idade);
-        }
+    bubbleSort(disciplina->estudantes, disciplina->qtd_est);
+
+    for (i = 0; i < disciplina->qtd_est; i++) {
+        printf("Nome: %s\n", disciplina->estudantes[i].nome);
+        printf("Idade: %d\n", disciplina->estudantes[i].idade);
     }
 
     printf("\n");
@@ -151,8 +174,8 @@ int main() {
         cadastrarEstudantes(&disciplinas[i]);
     }
 
-    relatorioDisciplina(&disciplinas[0], 1);
-    relatorioDisciplina(&disciplinas[1], 0);
+    relatorioDisciplina(&disciplinas[0]);
+    relatorioDisciplina(&disciplinas[1]);
 
     return 0;
 }
