@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <cstring>
+#include <stdlib.h>
 
 #define Max_fabricantes 5
 #define Max_produtos 50
@@ -169,6 +170,7 @@ void listarFabricantes(struct Fabricante fabricantes[], int quantidade)
     }
     printf("+===============================================================================================\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -176,6 +178,9 @@ void listarFabricantes(struct Fabricante fabricantes[], int quantidade)
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -198,6 +203,7 @@ void listarProdutos(struct Produto produtos[], int quantidade)
     }
     printf("+===================================================================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -205,6 +211,9 @@ void listarProdutos(struct Produto produtos[], int quantidade)
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -233,6 +242,7 @@ void listarProdutosPorUF(struct Produto produtos[], int quantidade)
     }
     printf("+===================================================================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -240,6 +250,9 @@ void listarProdutosPorUF(struct Produto produtos[], int quantidade)
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -268,6 +281,7 @@ void listarProdutosPorMarca(struct Produto produtos[], int quantidade, struct Fa
     }
     printf("+===================================================================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -275,6 +289,9 @@ void listarProdutosPorMarca(struct Produto produtos[], int quantidade, struct Fa
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -309,6 +326,7 @@ void mostrarUFMaiorValorVenda(struct Produto produtos[], int quantidade, struct 
     printf("| %-10s | %-20s |\n", fabricante.uf, fabricante.nome);
     printf("+=======================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -316,6 +334,9 @@ void mostrarUFMaiorValorVenda(struct Produto produtos[], int quantidade, struct 
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -350,6 +371,7 @@ void mostrarFabricanteProdutoMaisBarato(struct Produto produtos[], int quantidad
     printf("| %-10s | %-20s |\n", produtos[indice_menor_valorvenda].fabricante.nome, produtos[indice_menor_valorvenda].descricao);
     printf("+========================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -357,6 +379,9 @@ void mostrarFabricanteProdutoMaisBarato(struct Produto produtos[], int quantidad
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -397,6 +422,7 @@ void ordenarProdutosPorValor(struct Produto produtos[], int quantidade)
     }
     printf("+===========================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -404,6 +430,9 @@ void ordenarProdutosPorValor(struct Produto produtos[], int quantidade)
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -438,6 +467,7 @@ void ordenarProdutosPorLucro(struct Produto produtos[], int quantidade)
     }
     printf("+===========================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -445,6 +475,9 @@ void ordenarProdutosPorLucro(struct Produto produtos[], int quantidade)
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
@@ -479,6 +512,7 @@ void ordenarProdutosPorPercentualLucro(struct Produto produtos[], int quantidade
     }
     printf("+===============================================================================================+\n\n");
     printf("\n[0] Voltar para o menu principal\n");
+    printf("\n[9] Para encerrar o programa\n");
         scanf("%d", &x);
 
         switch (x)
@@ -486,6 +520,9 @@ void ordenarProdutosPorPercentualLucro(struct Produto produtos[], int quantidade
             case 0:
                 printf("Voltando para o menu principal...\n");
                 break;
+            case 9:
+                printf("Encerrando...\n");
+                exit(0);
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
