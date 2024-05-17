@@ -45,7 +45,7 @@ def loop_jogo(heroi, item_raro_encontrado, fugas_realizadas, eventos_realizados)
             item_raro_encontrado, fugas_realizadas, eventos_realizados = avancar_jornada(heroi, item_raro_encontrado, fugas_realizadas, eventos_realizados)
         elif escolha == "2":
             print("Obrigado por jogar. Até logo!")
-            break
+            exit()
         else:
             print("Opção inválida. Tente novamente.")
 
